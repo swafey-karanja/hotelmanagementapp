@@ -5,11 +5,12 @@ import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
-  title: 'hotel-transylvania',
+  title: 'Hotel-transylvania',
 
-  projectId: 'c65ujrog',
+  projectId: 'geig9sqz',
   dataset: 'production',
-  basePath: "/studio",
+
+  basePath: '/studio',
 
   plugins: [structureTool(), visionTool()],
 

@@ -44,15 +44,15 @@ const Header = () => {
         </ul>
       </div>
 
-      <ul className="flex items-center justify-between w-full md:w-1/3 mt-4">
+      <ul className="flex items-center justify-between w-full md:w-1/3 mt-4 ">
         <li className="font-bold hover:-translate-y-2 durations-500 transition-all">
-            <Link href="/" className="">
+            <Link href="/" className="mr-4">
               Home
             </Link>
         </li>
 
         <li className="font-bold hover:-translate-y-2 durations-500 transition-all">
-            <Link href="/rooms" className="">
+            <Link href="/rooms" className="mr-4">
               Rooms
             </Link>
         </li>

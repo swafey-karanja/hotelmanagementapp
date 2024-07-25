@@ -31,7 +31,7 @@ const account = {
         }),
 
         defineField ({
-            name: "accessTokenExpired",
+            name: "accessTokenExpires",
             type: "number",         
         }),
 

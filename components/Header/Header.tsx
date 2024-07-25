@@ -21,7 +21,7 @@ const Header = () => {
 
         <ul className="flex items-center ml-5">
           <li className="flex items-center">
-            <Link href="/auth">
+            <Link href='/auth'>
               <FaUserCircle className="cursor-pointer" />
             </Link>
           </li>

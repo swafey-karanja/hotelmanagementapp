@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import ThemeProvider from "@/components/ThemeProvider/ThemeProvider";
-import Auth from "./auth/Page";
 import { NextAuthProvider } from "@/components/AuthProvider/AuthProvider";
 import Toast from "@/components/Toast/Toast";
 
@@ -22,9 +21,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body className={poppins.className}>
@@ -33,9 +32,9 @@ export default function RootLayout({
             <Toast />
             <main className="font-normal">
               <Header />
-              {children}
+               {children}
               <Footer />
-              </main>
+            </main>
           </ThemeProvider>
         </NextAuthProvider>
         </body>

@@ -1,11 +1,14 @@
 'use client';
 
+import { signUp } from "next-auth-sanity/client";
+import { signIn, useSession } from "next-auth/react";
 import { ChangeEvent, FormEvent, useState } from "react";
+import toast from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai"
 import { FcGoogle } from "react-icons/fc"
 
 const defaultFormData = {
-    username: '',
+    name: '',
     email: '',
     password: '',
 };
@@ -21,13 +24,30 @@ const Auth = () => {
         setFormData({...formData, [name]: value});
     };
 
+    const { data: session } = useSession();
+
+    console.log(session);
+
+    const loginHandler = async () => {
+        try {
+            await signIn();
+        } catch (error) {
+            console.log(error);
+            toast.error("Something went wrong. Please try again.")
+        }
+    }
+
     const handleSubmit = async ( event: FormEvent<HTMLFormElement> ) => {
         event.preventDefault();
 
         try {
-            console.log(formData);
+            const user = await signUp(formData);
+            if (user) {
+                toast.success('Success. Please sign In');
+            }
         } catch (error) {
             console.log(error);
+            toast.error('Error. Please try again');
         } finally {
             setFormData(defaultFormData);
         };
@@ -42,19 +62,19 @@ const Auth = () => {
                 </h1>
                 <p>OR</p>
                 <span className="inline-flex items-center">
-                    <AiFillGithub className="mr-4 text-4xl cursor-pointer text-black dark:text-white" />
-                    <FcGoogle className="ml-4 text-4xl cursor-pointer"/>
+                    <AiFillGithub onClick={loginHandler} className="mr-4 text-4xl cursor-pointer text-black dark:text-white" />
+                    <FcGoogle onClick={loginHandler} className="ml-4 text-4xl cursor-pointer"/>
                 </span>
             </div>
 
             <form action="" className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <input 
                     type="text" 
-                    name="username" 
+                    name="name" 
                     placeholder="Dracula" 
                     required 
                     className={inputStyles}
-                    value={formData.username}
+                    value={formData.name}
                     onChange={handleInputChange}
                 />
 
@@ -84,7 +104,7 @@ const Auth = () => {
                 </button>
             </form>
 
-            <button className="text-blue-700 underline">
+            <button onClick={loginHandler} className="text-blue-700 underline">
                 Login
             </button>
         </div>

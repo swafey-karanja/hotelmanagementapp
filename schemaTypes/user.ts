@@ -24,6 +24,18 @@ const user = {
         }),
 
         defineField({
+            name: "email",
+            title: "Email",
+            type: "string",
+        }),
+
+        defineField({
+            name: "emailVerified",
+            type: "datetime",
+            hidden: true,
+        }),
+
+        defineField({
             name: "image",
             title: "Image",
             type: "url",

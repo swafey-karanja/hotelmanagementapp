@@ -7,6 +7,8 @@ const nextConfig = {
           hostname: "cdn.sanity.io",
         },
       ],
+
+      domains: ["lh3.googleusercontent.com"],
     },
     experimental: {
       taint: true,

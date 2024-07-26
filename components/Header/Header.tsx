@@ -5,14 +5,17 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import ThemeContext from "@/context/themeContext";
 import { useContext } from "react";
+import { useSession } from "next-auth/react";
+import Image from 'next/image';
 
 const Header = () => {
 
-  const {darkTheme, setDarkTheme} = useContext(ThemeContext);
+  const { darkTheme, setDarkTheme } = useContext(ThemeContext);
+  const { data: session } = useSession();
 
   return (
     <header
-    className="py-10 px-4 container mx-auto text-xl flex flex-wrap md:flex-nowrap items-center justify-between"
+      className="py-10 px-4 container mx-auto text-xl flex flex-wrap md:flex-nowrap items-center justify-between"
     >
       <div className="flex items-center w-full md:2/3">
         <Link href="/" className="font-black text-tertiary-dark">
@@ -21,9 +24,26 @@ const Header = () => {
 
         <ul className="flex items-center ml-5">
           <li className="flex items-center">
-            <Link href='/auth'>
+            {session?.user ? (
+              <Link href={`/users/${session.user.id}`}>
+              {session.user.image ? (
+                <div className="w-8 h-8 rounded-full overflow-hidden">
+                  <Image 
+                    src={session.user.image} 
+                    alt={session.user.name!} 
+                    width={40}
+                    height={40}
+                  />
+                </div>
+              ) : (
+                <FaUserCircle className="cursor-pointer" />
+              )}
+            </Link>
+            ) : (
+              <Link href='/auth'>
               <FaUserCircle className="cursor-pointer" />
             </Link>
+            )}
           </li>
 
           <li className="ml-5">

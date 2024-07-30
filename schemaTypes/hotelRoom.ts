@@ -11,6 +11,14 @@ const hotelRoom = {
     title: "Hotel Room",
     type: "document",
     fields: [
+        defineField({
+            name: 'name',
+            title: 'Name',
+            type: 'string',
+            validation: Rule =>
+              Rule.required().max(50).error('Maximum 50 Characters'),
+          }),
+
         defineField ({
             name: "slug",
             type: "slug",
@@ -25,7 +33,7 @@ const hotelRoom = {
             title: "Description",
             type: "text",
             validation: Rule => 
-                Rule.required().min(100).error("Maximum of 100 characters")
+                Rule.required().min(100).error("Minimum of 100 characters")
         }),
 
         defineField ({

@@ -29,10 +29,11 @@ const Header = () => {
               {session.user.image ? (
                 <div className="w-8 h-8 rounded-full overflow-hidden">
                   <Image 
-                    src={session.user.image} 
-                    alt={session.user.name!} 
+                    src={session.user.image}
+                    alt={session.user.name!}
                     width={40}
                     height={40}
+                    className="scale-animation img"
                   />
                 </div>
               ) : (

@@ -113,13 +113,13 @@ const hotelRoom = {
         }),
 
         defineField ({
-            name: "dimension",
-            title: "Dimension",
+            name: "dimensions",
+            title: "Dimensions",
             type: "string",
         }),
 
         defineField ({
-            name: "numberofBeds",
+            name: "numberOfBeds",
             title: "Number of Beds",
             type: "number",
             validation: Rule => Rule.required().min(1),

@@ -40,23 +40,24 @@ const FeaturedRoom: FC<Props> = props => {
       </div>
 
       <div className="md:py-10 md:w-1/2 text-left">
-          <h3 className="font-heading mb-12" >Featured Room</h3>
+          <h3 className="font-heading mb-6" >Featured Room</h3>
 
+          <h4 className="text-tertiary-dark text-xl lg:text-4xl mb-4 font-bold">{featuredRoom.name}</h4>
           <p className="font-normal max-w-md">{featuredRoom.description}</p>
 
           <div className="flex flex-col md:flex-row md:items-end justify-between mt-5">
             <div className="flex mb-3 md:mb-0">
               <div className="flex gap-3 flex-col items-center justify-center mr-4">
-                <p className="text-xs lg:text-xl text-center">Start From</p>
-                <p className="md:font-bold flex font-medium text-lg xl:text-5xl">
+                <p className="text-xs lg:text-2xl text-left text-tertiary-dark">Start From</p>
+                <p className="md:font-bold flex font-medium text-lg xl:text-3xl">
                   ${featuredRoom.price}
                 </p>
               </div>
 
               <div className="flex gap-3 flex-col items-center justify-center mr-4 ml-5">
-                <p className="text-xs lg:text-xl text-center">Discount</p>
-                <p className="md:font-bold flex font-medium text-lg xl:text-5xl">
-                  ${featuredRoom.discount}
+                <p className="text-xs lg:text-2xl text-left text-tertiary-dark">Discount</p>
+                <p className="md:font-bold flex font-medium text-lg xl:text-3xl">
+                  {featuredRoom.discount} %
                 </p>
               </div>
             </div>

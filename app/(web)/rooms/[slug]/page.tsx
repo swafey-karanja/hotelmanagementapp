@@ -5,6 +5,7 @@ import useSWR from "swr";
 import LoadingSpinner from "../../loading";
 import HotelPhotoGallery from "@/components/HotelPhotoGallery/HotelPhotoGallery";
 import BookRoomCta from "@/components/BookRoomCta/BookRoomCta";
+import toast from "react-hot-toast";
 
 import { MdOutlineCleaningServices } from "react-icons/md";
 import { LiaFireExtinguisherSolid } from "react-icons/lia";
@@ -12,12 +13,15 @@ import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
 import { useState } from "react";
 
+
 const RoomDetails = (props: {params: { slug:string }}) => {
 
   const { params: { slug } } = props;
 
   const [checkInDate, setCheckInDate] = useState<Date | null>(null);
   const [checkOutDate, setCheckOutDate] = useState<Date | null>(null);
+  const [adults, setAdults] =  useState(1);
+  const [children, setChildren] = useState(0);
 
   const fetchRoom = async () => getRoomData(slug);
 
@@ -29,7 +33,37 @@ const RoomDetails = (props: {params: { slug:string }}) => {
 
   if(!room) return <LoadingSpinner />;
 
-  console.log(room);
+  const calcMinCheckoutDate = () => {
+    if (checkInDate) {
+      const nextDay = new Date(checkInDate);
+      nextDay.setDate(nextDay.getDate() + 1);
+      return nextDay;
+    }
+    return null;
+  };
+
+  const calcNumberofDays = () => {
+    if (!checkInDate || !checkOutDate) return 0;
+    const timeDiff = checkOutDate.getTime() - checkInDate.getTime();
+    const noOfDays = Math.ceil(timeDiff / (24* 60 * 60 * 1000));
+    return noOfDays;
+  };
+
+  const handleBooking = () => {
+    if(!checkInDate || !checkOutDate) {
+      return toast.error("Please select a check In /Check Out date");
+    }
+
+    if (checkInDate > checkOutDate) {
+      toast.error("Please choose a valid check In period");
+    }
+
+    const numberOfDays = calcNumberofDays();
+
+    const hotelRoomSlug = room.slug.current;
+
+    //Intergrate stripe
+  };
 
   return (
     <div>
@@ -112,12 +146,28 @@ const RoomDetails = (props: {params: { slug:string }}) => {
             </div>
 
             <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow-auto p-3">
-              <BookRoomCta price={room.price} discount={room.discount} specialNote={room.specialNote} checkInDate={checkInDate} setCheckInDate={setCheckInDate}/>
+              <BookRoomCta 
+                price={room.price} 
+                discount={room.discount} 
+                specialNote={room.specialNote} 
+                checkInDate={checkInDate} 
+                setCheckInDate={setCheckInDate} 
+                checkOutDate={checkOutDate} 
+                setCheckOutDate={setCheckOutDate} 
+                calcMinCheckoutDate={calcMinCheckoutDate}
+                adults={adults}
+                children={children}
+                setAdults={setAdults}
+                setChildren={setChildren}
+                isBooked={room.isBooked}
+                handleBooking={handleBooking}
+              />
             </div>
           </div>
         </div>
     </div>
-  )
-}
+  );
+};
 
 export default RoomDetails;
+

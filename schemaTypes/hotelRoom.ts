@@ -113,7 +113,7 @@ const hotelRoom = {
         }),
 
         defineField ({
-            name: "dimensions",
+            name: "dimension",
             title: "Dimensions",
             type: "string",
         }),

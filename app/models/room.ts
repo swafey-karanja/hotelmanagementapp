@@ -7,7 +7,7 @@ export type Image ={
     url: string;
 };
 
-type Amenity = {
+type amenity = {
     _key: string;
     amenity: string;
     icon: string;
@@ -29,7 +29,7 @@ export type Room = {
     isFeatured: boolean;
     name: string;
     numberOfBeds: number;
-    offeredAmenities: Amenity;
+    offeredAmenities: amenity;
     price: number;
     slug: Slug;
     specialNote : string;

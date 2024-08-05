@@ -29,7 +29,7 @@ const HotelPhotoGallery: FC<{ photos: ImageType[] }> = ({photos}) => {
     };
 
     const totalPhotos = photos.length;
-    const maximumVisiblePhotos = 2;
+    const maximumVisiblePhotos = 3;
     const displayPhotos = photos.slice(1, maximumVisiblePhotos - 1);
     const remainingPhotosCount = totalPhotos - maximumVisiblePhotos;
 

@@ -4,16 +4,20 @@ import { getRoomData } from "@/libs/apis";
 import useSWR from "swr";
 import LoadingSpinner from "../../loading";
 import HotelPhotoGallery from "@/components/HotelPhotoGallery/HotelPhotoGallery";
-import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal } from "react";
+import BookRoomCta from "@/components/BookRoomCta/BookRoomCta";
+
 import { MdOutlineCleaningServices } from "react-icons/md";
 import { LiaFireExtinguisherSolid } from "react-icons/lia";
 import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
-import BookRoomCta from "@/components/BookRoomCta/BookRoomCta";
+import { useState } from "react";
 
 const RoomDetails = (props: {params: { slug:string }}) => {
 
   const { params: { slug } } = props;
+
+  const [checkInDate, setCheckInDate] = useState<Date | null>(null);
+  const [checkOutDate, setCheckOutDate] = useState<Date | null>(null);
 
   const fetchRoom = async () => getRoomData(slug);
 
@@ -108,7 +112,7 @@ const RoomDetails = (props: {params: { slug:string }}) => {
             </div>
 
             <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow-auto p-3">
-              <BookRoomCta price={room.price} discount={room.discount} specialNote={room.specialNote} />
+              <BookRoomCta price={room.price} discount={room.discount} specialNote={room.specialNote} checkInDate={checkInDate} setCheckInDate={setCheckInDate}/>
             </div>
           </div>
         </div>

@@ -14,7 +14,7 @@ const booking = {
         }),
 
         defineField ({
-            name: "hotelroom",
+            name: "hotelRoom",
             title: "Hotelroom",
             type: "reference",
             to : [{ type: "hotelRoom" }],

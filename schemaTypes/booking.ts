@@ -22,21 +22,21 @@ const booking = {
         }),
 
         defineField ({
-            name: "checkinDate",
+            name: "checkInDate",
             title: "Check-in-Date",
             type: "date",
             validation: Rule => Rule.required(),
         }),
 
         defineField ({
-            name: "checkoutDate",
+            name: "checkOutDate",
             title: "Check-out-Date",
             type: "date",
             validation: Rule => Rule.required(),
         }),
 
         defineField ({
-            name: "numberofDays",
+            name: "numberOfDays",
             title: "Number-of-Days",
             type: "number",
             initialValue: 1,

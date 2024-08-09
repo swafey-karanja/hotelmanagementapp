@@ -40,8 +40,8 @@ export async function POST (req: Request, res: Response) {
     };
 
     const userId = session.user.id;
-    const formattedCheckinDate = checkInDate.split('T')[0];
-    const formattedCheckoutDate = checkOutDate.split('T')[0];
+    const formattedCheckInDate = checkInDate.split('T')[0];
+    const formattedCheckOutDate = checkOutDate.split('T')[0];
 
     try {
         const room = await getRoomData(hotelRoomSlug);
@@ -67,6 +67,17 @@ export async function POST (req: Request, res: Response) {
             ],
             payment_method_types: ['card'],
             success_url: `${origin}/users/${userId}`,
+            metadata: {
+                checkInDate : formattedCheckInDate, 
+                checkOutDate : formattedCheckOutDate, 
+                adults, 
+                children, 
+                numberOfDays, 
+                hotelRoom: room._id,
+                user: userId,
+                discount: room.discount,
+                totalPrice
+            },
         });
 
         return NextResponse.json(stripeSession, {

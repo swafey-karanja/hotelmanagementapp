@@ -39,9 +39,9 @@ export type Room = {
 export type CreateBookingDto = {
     user: string;
     hotelRoom: string;
-    checkinDate: string;
-    checkoutDate: string;
-    numberofDays: number;
+    checkInDate: string;
+    checkOutDate: string;
+    numberOfDays: number;
     adults: number;
     children: number;
     totalPrice: number;

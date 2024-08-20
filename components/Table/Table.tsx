@@ -13,7 +13,7 @@ type Props = {
 
 const Table: FC<Props> = ({ bookingDetails, setRoomId, toggleRatingModal }) => {
   const router = useRouter();
-  console.log(bookingDetails);
+  // console.log(bookingDetails);
   return (
     <div className='overflow-x-auto max-w-[340px] rounded-lg mx-auto md:max-w-full shadow-md sm:rounded-lg'>
       <table className='w-full text-sm text-left text-gray-500'>

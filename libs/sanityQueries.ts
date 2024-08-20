@@ -68,3 +68,17 @@ export const getUserDataQuery = groq`*[_type == "user" && _id == $userId][0] {
     _createdAt,
     image
 }`;
+
+export const checkReviewExistsQuery = groq`*[_type =="review" && user._ref == $userId && hotelRoom._ref == $hotelRoomId][0] {
+    _id
+}`;
+
+export const getRoomReviewsQuery = groq`*[_type == 'review' && hotelRoom._ref == $roomId] {
+    _createdAt,
+    _id,
+    text,
+    user -> {
+        name
+    },
+    userRating
+}`;

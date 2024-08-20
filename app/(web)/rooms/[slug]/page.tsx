@@ -14,6 +14,7 @@ import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
 import { useState } from "react";
 import axios from "axios";
+import RoomReviews from "@/components/RoomReviews/RoomReviews";
 
 
 
@@ -169,7 +170,7 @@ const RoomDetails = (props: {params: { slug:string }}) => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Reviews */}
+                  <RoomReviews roomId={room._id}/>
                 </div>
                 </div>
               </div>

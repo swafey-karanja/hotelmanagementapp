@@ -1,0 +1,14 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "hotelmanagementapp\\app\\api\\",
+            "color": "foldercolorizer.Gold"
+        },
+        {
+            "folderPath": "hotelmanagementapp\\app\\(web)\\"
+        },
+        {
+            "folderPath": "hotelmanagementapp\\.gitignore\\"
+        }
+    ]
+}

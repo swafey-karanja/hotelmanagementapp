@@ -16,6 +16,7 @@ import Table from "@/components/Table/Table";
 import Chart from "@/components/Chart/Chart";
 import RatingModal from "@/components/RatingModal/RatingModal";
 import BackDrop from "@/components/BackDrop/BackDrop";
+import toast from "react-hot-toast";
 
 
 const userDetails = (props: {params: {id: string}}) => {
@@ -28,9 +29,35 @@ const userDetails = (props: {params: {id: string}}) => {
   const [roomId, setRoomId] = useState<string | null>(null);
   const [isRatingVisible, setIsRatingVisible] = useState(false);
   const [ratingValue, setRatingValue] = useState(0);
-  const [ratingText,setRatingText] = useState("");
+  const [ratingText, setRatingText] = useState("");
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
 
   const toggleRatingModal = () => setIsRatingVisible(prevState => !prevState);
+
+  const reviewSubmitHandler = async () => {
+    if (!ratingText.trim().length || !ratingValue) {
+      return toast.error('Please provide rating text and a rating value');
+    }
+
+    if (!roomId) toast.error('Room ID required');
+
+    setIsSubmittingReview(true);
+
+    try {
+      const { data } = await axios.post("/api/users", {roomId, reviewText: ratingText, ratingValue});
+      console.log(data);
+      toast.success("Review Submitted Succesfully");
+    } catch (error) {
+      console.log(error);
+      toast.error('review submission failed');
+    } finally {
+      setRatingText("");
+      setRatingValue(0);
+      setRoomId(null);
+      setIsSubmittingReview(false);
+      setIsRatingVisible(false);
+    }
+  };
 
   const fetchUserBooking = async () => getUserBookings(userId);
   const fetchUserData = async () => {
@@ -175,6 +202,9 @@ const userDetails = (props: {params: {id: string}}) => {
         setRatingValue={setRatingValue}
         ratingText={ratingText} 
         setRatingText={setRatingText}
+        reviewSubmitHandler={reviewSubmitHandler}
+        isSubmittingReview={isSubmittingReview}
+        toggleRatingModal={toggleRatingModal}
       />
       <BackDrop isOpen={isRatingVisible}/>
 

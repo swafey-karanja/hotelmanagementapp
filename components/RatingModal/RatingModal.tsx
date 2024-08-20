@@ -7,9 +7,23 @@ type Props = {
     setRatingValue: Dispatch<SetStateAction<number>>;
     ratingText: string;
     setRatingText: Dispatch<SetStateAction<string>>;
+    reviewSubmitHandler: () => Promise<string | undefined>;
+    isSubmittingReview: boolean;
+    toggleRatingModal: () => void;
 };
 
-const RatingModal: FC<Props> = ({ isOpen, ratingValue, setRatingValue, ratingText, setRatingText }) => {
+const RatingModal: FC<Props> = props => {
+
+    const { 
+        isOpen, 
+        ratingValue, 
+        setRatingValue, 
+        ratingText, 
+        setRatingText, 
+        reviewSubmitHandler, 
+        isSubmittingReview,
+        toggleRatingModal  
+    } = props;
 
     const starValues = [1,2,3,4,5];
   return (
@@ -19,7 +33,17 @@ const RatingModal: FC<Props> = ({ isOpen, ratingValue, setRatingValue, ratingTex
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-medium"></label>
                 <div className="flex items-center">
-                    {starValues.map(value => <button className={`w-6 h-6 ${ratingValue === value ? 'text-yellow-500' : 'text-gray-400'}`} key={value} onClick={() => setRatingValue(value)}><BsStarFill /></button>)}
+                    {starValues.map(
+                        value => <button 
+                            className={`w-6 h-6 ${
+                                ratingValue === value 
+                                    ? 'text-yellow-500' 
+                                    : 'text-gray-400'}`} key={value} 
+                            onClick={() => setRatingValue(value)}>
+                                <BsStarFill />
+                            </button>
+                        )
+                    }
                 </div>
             </div>
 
@@ -29,11 +53,23 @@ const RatingModal: FC<Props> = ({ isOpen, ratingValue, setRatingValue, ratingTex
                     value={ratingText} 
                     onChange={e => setRatingText(e.target.value)} 
                     rows={4}
-                    className="w-full px-2 py-3 border rounded-md"
+                    className="w-full px-2 py-3 border rounded-md text-black"
                 ></textarea>
             </div>
 
-            
+            <div className="flex justify-end">
+                <button 
+                    onClick={reviewSubmitHandler} 
+                    className="px-4 py-2 bg-primary text-white rounded-lg"
+                    disabled={isSubmittingReview}
+                >
+                    {isSubmittingReview ? 'Submitting review' : 'Submit'}
+                </button>
+
+                <button onClick={toggleRatingModal} className="ml-2 px-4 py-2 bg-gray-3 text-gray-700 rounded-md hover:bg-gray-400">
+                    Cancel
+                </button>
+            </div>
         </div>
     </div>
   )

@@ -19,4 +19,4 @@ const Rating: FC<{rating: number}> = ({ rating }) => {
   )
 }
 
-export default Rating
+export default Rating;
